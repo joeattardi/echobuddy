@@ -1,8 +1,12 @@
 <script>
   import ChatText from 'phosphor-svelte/lib/ChatText';
+  import CircleNotch from 'phosphor-svelte/lib/CircleNotch';
+  import SpeechInput from '$lib/components/SpeechInput.svelte';
+  import { speakText } from '$lib/speech';
 
   let response = '';
   let error;
+  let isLoading = false;
 
   async function sendChatRequest(query) {
     const apiResponse = await fetch('/chat', {
@@ -22,16 +26,22 @@
   }
 
   async function handleQuery(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const query = formData.get('query');
+    const query = event.detail;
     try {
       error = null;
+      isLoading = true;
       response = await sendChatRequest(query);
+      speakText(response);
     } catch (apiError) {
       error = apiError;
+    } finally {
+      isLoading = false;
     }
-}
+  }
+
+  function handleSpeechError(event) {
+    error = event.detail;
+  }
 </script>
 
 <main class="p-4">
@@ -40,9 +50,10 @@
     EchoBuddy
   </h1>
   <div class="w-2/3 m-auto text-center">
-    <form on:submit={handleQuery}>
-      <input type="text" name="query" class="border border-slate-800 w-full rounded p-2">
-    </form>
+    <SpeechInput on:query={handleQuery} on:error={handleSpeechError} />
+    {#if isLoading}
+      <CircleNotch class="m-auto animate-spin" size={64} />
+    {/if}
     <div class="mt-4">
       {response}
     </div>
