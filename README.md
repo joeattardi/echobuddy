@@ -1,6 +1,6 @@
 # EchoBuddy
 
-## Solution for Project 1, Milestone 1
+## Solution for Project 1, Milestone 2
 
 ### Getting started
 

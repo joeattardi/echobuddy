@@ -2,11 +2,36 @@
   import ChatText from 'phosphor-svelte/lib/ChatText';
 
   let response = '';
+  let error;
 
-  function handleQuery(event) {
-    event.preventDefault();
-    response = 'Thanks for your question, we will have an answer for you soon!';
+  async function sendChatRequest(query) {
+    const apiResponse = await fetch('/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ query })
+    });
+
+    const data = await apiResponse.json();
+    if (apiResponse.status !== 200) {
+      throw new Error(data.message);
+    }
+
+    return data.response.message;
   }
+
+  async function handleQuery(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const query = formData.get('query');
+    try {
+      error = null;
+      response = await sendChatRequest(query);
+    } catch (apiError) {
+      error = apiError;
+    }
+}
 </script>
 
 <main class="p-4">
@@ -21,5 +46,10 @@
     <div class="mt-4">
       {response}
     </div>
+    {#if error}
+      <div class="bg-red-300 p-4">
+        {error}
+      </div>
+    {/if}
   </div>
 </main>
