@@ -2,10 +2,12 @@ import OpenAI from 'openai';
 import { OPENAI_API_KEY } from '$env/static/private';
 
 import { schema as getJoke } from './functions/getJoke';
+import { schema as getWeather } from './functions/getWeather';
 import { callFunction } from './functions';
 
 const tools = [
-  getJoke
+  getJoke,
+  getWeather
 ];
 
 const openai = new OpenAI({
