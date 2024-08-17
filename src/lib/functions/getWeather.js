@@ -18,11 +18,11 @@ export async function getWeather() {
   const weatherResponse = await fetch(weatherUrl);
   const weatherData = await weatherResponse.json();
 
-      return {
-        reply: {
-          location: weatherData.name,
-          temperature: Math.round(weatherData.main.temp),
-          conditions: weatherData.weather[0].main
-        }
-      };
+  return {
+    reply: {
+      location: weatherData.name,
+      temperature: Math.round(weatherData.main.temp),
+      conditions: weatherData.weather[0].main
+    }
+  };
 }
