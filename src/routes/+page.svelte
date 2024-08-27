@@ -3,8 +3,11 @@
   import CircleNotch from 'phosphor-svelte/lib/CircleNotch';
   import SpeechInput from '$lib/components/SpeechInput.svelte';
   import { speakText } from '$lib/speech';
+  import { getWidget } from '$lib/components/widgets';
 
   let response = '';
+  let responseWidget;
+  let responseData;
   let error;
   let isLoading = false;
 
@@ -22,6 +25,8 @@
       throw new Error(data.message);
     }
 
+    responseWidget = getWidget(data.response.data?.function);
+    responseData = data.response.data?.widgetData;
     return data.response.message;
   }
 
@@ -57,6 +62,9 @@
     <div class="mt-4">
       {response}
     </div>
+    {#if responseWidget}
+      <svelte:component this={responseWidget} data={responseData} />
+    {/if}
     {#if error}
       <div class="bg-red-300 p-4">
         {error}

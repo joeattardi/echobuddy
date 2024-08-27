@@ -41,6 +41,12 @@ export async function getWeather({ location }) {
       location: weatherData.name,
       temperature: Math.round(weatherData.main.temp),
       conditions: weatherData.weather[0].main
+    },
+    widgetData: {
+      location: weatherData.name,
+      temperature: Math.round(weatherData.main.temp),
+      conditions: weatherData.weather[0].main,
+      icon: weatherData.weather[0].icon
     }
   };
 }

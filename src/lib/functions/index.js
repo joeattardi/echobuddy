@@ -29,6 +29,10 @@ export async function callFunction(name, args, toolCallId, openai, messages) {
 
   console.log('Received from OpenAI:', response.choices[0].message.content);
   return {
-    message: response.choices[0].message.content
+    message: response.choices[0].message.content,
+    data: {
+      function: name,
+      widgetData: result.widgetData
+    }
   };
 }
