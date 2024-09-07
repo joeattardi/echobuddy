@@ -3,11 +3,13 @@ import { OPENAI_API_KEY } from '$env/static/private';
 
 import { schema as getJoke } from './functions/getJoke';
 import { schema as getWeather } from './functions/getWeather';
+        import { schema as getNews } from './functions/getNews';
 import { callFunction } from './functions';
 
 const tools = [
   getJoke,
-  getWeather
+  getWeather,
+  getNews
 ];
 
 const openai = new OpenAI({
