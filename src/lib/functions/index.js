@@ -1,11 +1,13 @@
 import { getJoke } from './getJoke';
 import { getWeather } from './getWeather';
 import { getNews } from './getNews';
+import { getStock } from './getStock';
 
 const functions = {
   getJoke,
   getWeather,
-  getNews
+  getNews,
+  getStock
 };
 
 export async function callFunction(name, args, toolCallId, openai, messages) {
