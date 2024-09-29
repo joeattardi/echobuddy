@@ -5,13 +5,15 @@ import { schema as getJoke } from './functions/getJoke';
 import { schema as getWeather } from './functions/getWeather';
 import { schema as getNews } from './functions/getNews';
 import { schema as getStock } from './functions/getStock';
+import { schema as getNowPlaying } from './functions/getNowPlaying';
 import { callFunction } from './functions';
 
 const tools = [
   getJoke,
   getWeather,
   getNews,
-  getStock
+  getStock,
+  getNowPlaying
 ];
 
 const openai = new OpenAI({
