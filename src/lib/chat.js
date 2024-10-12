@@ -6,6 +6,7 @@ import { schema as getWeather } from './functions/getWeather';
 import { schema as getNews } from './functions/getNews';
 import { schema as getStock } from './functions/getStock';
 import { schema as getNowPlaying } from './functions/getNowPlaying';
+import { schema as getActor } from './functions/getActor';
 import { callFunction } from './functions';
 
 const tools = [
@@ -13,7 +14,8 @@ const tools = [
   getWeather,
   getNews,
   getStock,
-  getNowPlaying
+  getNowPlaying,
+  getActor
 ];
 
 const openai = new OpenAI({

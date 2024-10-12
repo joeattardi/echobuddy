@@ -3,13 +3,15 @@ import { getWeather } from './getWeather';
 import { getNews } from './getNews';
 import { getStock } from './getStock';
 import { getNowPlaying } from './getNowPlaying';
+import { getActor } from './getActor';
 
 const functions = {
   getJoke,
   getWeather,
   getNews,
   getStock,
-  getNowPlaying
+  getNowPlaying,
+  getActor
 };
 
 export async function callFunction(name, args, toolCallId, openai, messages) {
