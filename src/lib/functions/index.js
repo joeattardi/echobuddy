@@ -4,6 +4,7 @@ import { getNews } from './getNews';
 import { getStock } from './getStock';
 import { getNowPlaying } from './getNowPlaying';
 import { getActor } from './getActor';
+import { getMovie } from './getMovie';
 
 const functions = {
   getJoke,
@@ -11,7 +12,8 @@ const functions = {
   getNews,
   getStock,
   getNowPlaying,
-  getActor
+  getActor,
+  getMovie
 };
 
 export async function callFunction(name, args, toolCallId, openai, messages) {

@@ -7,6 +7,7 @@ import { schema as getNews } from './functions/getNews';
 import { schema as getStock } from './functions/getStock';
 import { schema as getNowPlaying } from './functions/getNowPlaying';
 import { schema as getActor } from './functions/getActor';
+import { schema as getMovie } from './functions/getMovie';
 import { callFunction } from './functions';
 
 const tools = [
@@ -15,7 +16,8 @@ const tools = [
   getNews,
   getStock,
   getNowPlaying,
-  getActor
+  getActor,
+  getMovie
 ];
 
 const openai = new OpenAI({
@@ -24,7 +26,7 @@ const openai = new OpenAI({
 
 export async function sendChatMessage(message) {
   const messages = [
-    { role: 'system', content: 'You are a helpful assistant.' },
+    { role: 'system', content: 'You are a helpful assistant. When calling a function, only include data from the function call in your response. Do not use Markdown in the response, use plain text only.' },
     { role: 'user', content: message }
   ];
 
